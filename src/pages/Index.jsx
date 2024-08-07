@@ -39,7 +39,7 @@ const Index = () => {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-2xl font-bold">BUNSEN</h1>
-        <nav>
+        <nav className="flex items-center space-x-6">
           <StaggeredAnimation>
             {[
               <a href="#" className="hover:text-gray-300">About</a>,
