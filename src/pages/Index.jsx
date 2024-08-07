@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import MouseParticles from 'react-mouse-particles';
+import HelixAnimation from '../components/HelixAnimation';
 
 const Index = () => {
   const textVariants = {
@@ -24,7 +25,10 @@ const Index = () => {
           </ul>
         </nav>
       </header>
-      <main className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-8">
+        <HelixAnimation />
+      </div>
+      <main className="container mx-auto px-4 py-8">
         <motion.h2 
           className="text-6xl font-bold mb-4"
           initial="hidden"
