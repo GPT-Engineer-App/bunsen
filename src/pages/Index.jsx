@@ -1,23 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Menu } from 'lucide-react';
+import { motion } from 'framer-motion';
 import MouseParticles from 'react-mouse-particles';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Index = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -27,7 +11,18 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <header className="p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">BUNSEN</h1>
-        <Menu className="h-6 w-6" />
+        <nav>
+          <ul className="flex space-x-6">
+            <li><a href="#" className="hover:text-gray-300">About</a></li>
+            <li><a href="#" className="hover:text-gray-300">Services</a></li>
+            <li><a href="#" className="hover:text-gray-300">Work</a></li>
+            <li>
+              <a href="#" className="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition duration-300">
+                Start a project →
+              </a>
+            </li>
+          </ul>
+        </nav>
       </header>
       <main className="container mx-auto px-4 py-16">
         <motion.h2 
@@ -67,12 +62,9 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <div className="fixed top-0 right-0 p-4">
-        <span className="text-sm">{mousePosition.x} / {mousePosition.y}</span>
-      </div>
       <MouseParticles g={1} num={6} color="random" cull="col,image-wrapper" life={1.5} size={12}/>
       
-      <footer className="bg-gradient-to-r from-purple-900 via-pink-800 to-orange-900 text-white py-16">
+      <footer className="bg-black text-white py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Ready to light it up?</h2>
@@ -110,27 +102,28 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h4 className="font-semibold mb-2">Subscribe to Updates</h4>
-              <div className="flex">
-                <input type="email" placeholder="Email Address" className="bg-transparent border-b border-white px-2 py-1 mr-2 focus:outline-none" />
-                <button className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center">
-                  →
-                </button>
-              </div>
-            </div>
-            <div className="text-sm">
-              <p>info@bunsenstudio.com</p>
-              <p>+1(415) 934-0347</p>
+          <div className="mb-8">
+            <h4 className="font-semibold mb-2">Subscribe to Updates</h4>
+            <div className="flex w-full">
+              <input type="email" placeholder="Email Address" className="bg-transparent border-b border-white px-2 py-1 mr-2 focus:outline-none flex-grow" />
+              <button className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+                →
+              </button>
             </div>
           </div>
           
-          <div className="mt-8 text-sm flex justify-between items-center">
-            <div>
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm mb-4 md:mb-0">
+              <p>info@bunsenstudio.com</p>
+              <p>+1(415) 934-0347</p>
+            </div>
+            <div className="text-sm">
               <a href="#" className="hover:underline mr-4">Terms & Conditions</a>
               <a href="#" className="hover:underline">Privacy Policy</a>
             </div>
+          </div>
+          
+          <div className="mt-8 text-sm text-center">
             <p>© Copyright 2023 Bunsen. All Rights Reserved.</p>
           </div>
         </div>
