@@ -17,10 +17,10 @@ const HelixAnimation = () => {
 
       for (let i = 0; i < numCircles; i++) {
         const angle = (i / numCircles) * Math.PI * 2 * 1.5 + phase; // 1.5 rotations
-        const distance = maxRadius * Math.min(t, 1); // All circles move outward together
+        const distance = (i / numCircles) * maxRadius * Math.min(t, 1);
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const radius = 10 + (distance / maxRadius) * 30; // Even larger circles
+        const radius = 5 + (distance / maxRadius) * 15; // Larger circles
 
         circles.push({ x, y, radius });
       }
@@ -48,7 +48,7 @@ const HelixAnimation = () => {
       const circleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circleElement.setAttribute('stroke', 'white');
       circleElement.setAttribute('fill', 'none');
-      circleElement.setAttribute('stroke-width', '1');
+      circleElement.setAttribute('stroke-width', '2');
       svg.appendChild(circleElement);
     });
 
