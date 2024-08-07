@@ -10,7 +10,7 @@ const HelixAnimation = () => {
     const centerX = width / 2;
     const centerY = height / 2;
     const numCircles = 40;
-    const maxRadius = Math.max(width, height);
+    const maxRadius = Math.min(width, height) * 0.5; // 50% of the smaller dimension
 
     svg.setAttribute('width', width);
     svg.setAttribute('height', height);
@@ -23,7 +23,7 @@ const HelixAnimation = () => {
         const distance = (i / numCircles) * maxRadius * Math.min(t, 1);
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const radius = 2 + (distance / maxRadius) * 8; // Smaller circles
+        const radius = 4 + (distance / maxRadius) * 16; // Larger circles
 
         circles.push({ x, y, radius });
       }
