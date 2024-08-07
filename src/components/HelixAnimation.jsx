@@ -9,39 +9,53 @@ const HelixAnimation = () => {
     const height = 400;
     const centerX = width / 2;
     const centerY = height / 2;
+    const numCircles = 30;
+    const maxRadius = Math.min(width, height) / 2 - 20;
 
-    const createHelix = (t) => {
-      const points = [];
-      const numPoints = 100;
-      const maxRadius = Math.min(width, height) / 2 - 20;
+    const createCircles = (t) => {
+      const circles = [];
 
-      for (let i = 0; i < numPoints; i++) {
-        const angle = (i / numPoints) * Math.PI * 2 * 3; // 3 rotations
-        const radius = (i / numPoints) * maxRadius * t;
-        const x = centerX + Math.cos(angle) * radius;
-        const y = centerY + Math.sin(angle) * radius;
-        points.push(`${x},${y}`);
+      for (let i = 0; i < numCircles; i++) {
+        const angle = (i / numCircles) * Math.PI * 2 * 3; // 3 rotations
+        const distance = (i / numCircles) * maxRadius * t;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+        const radius = 2 + (distance / maxRadius) * 8; // Circles grow as they move outward
+
+        circles.push({ x, y, radius });
       }
 
-      return points.join(' ');
+      return circles;
     };
 
     const animate = (t) => {
       if (t > 1) return;
 
-      const points = createHelix(t);
-      const path = svg.querySelector('path');
-      path.setAttribute('d', `M ${points}`);
+      const circles = createCircles(t);
+      const circleElements = svg.querySelectorAll('circle');
+
+      circles.forEach((circle, index) => {
+        circleElements[index].setAttribute('cx', circle.x);
+        circleElements[index].setAttribute('cy', circle.y);
+        circleElements[index].setAttribute('r', circle.radius);
+      });
 
       requestAnimationFrame(() => animate(t + 0.01));
     };
+
+    // Create initial circles
+    const initialCircles = createCircles(0);
+    initialCircles.forEach(circle => {
+      const circleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circleElement.setAttribute('fill', 'white');
+      svg.appendChild(circleElement);
+    });
 
     animate(0);
   }, []);
 
   return (
     <svg ref={svgRef} width="400" height="400" className="mx-auto">
-      <path fill="none" stroke="white" strokeWidth="2" />
     </svg>
   );
 };
