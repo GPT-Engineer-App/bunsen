@@ -15,6 +15,25 @@ const HelixAnimation = () => {
     svg.setAttribute('width', width);
     svg.setAttribute('height', height);
 
+    // Create gradient
+    const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    gradient.id = 'rainbowGradient';
+    gradient.setAttribute('gradientUnits', 'userSpaceOnUse');
+    gradient.setAttribute('x1', '0%');
+    gradient.setAttribute('y1', '0%');
+    gradient.setAttribute('x2', '100%');
+    gradient.setAttribute('y2', '100%');
+
+    const colors = ['#0000FF', '#00FFFF', '#FF1493', '#FF8C00'];
+    colors.forEach((color, index) => {
+      const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+      stop.setAttribute('offset', `${(index / (colors.length - 1)) * 100}%`);
+      stop.setAttribute('stop-color', color);
+      gradient.appendChild(stop);
+    });
+
+    svg.appendChild(gradient);
+
     const createCircles = (t, phase = 0) => {
       const circles = [];
 
@@ -49,9 +68,10 @@ const HelixAnimation = () => {
     const initialCircles = createCircles(0);
     initialCircles.forEach(circle => {
       const circleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circleElement.setAttribute('stroke', 'rgba(255, 255, 255, 0.2)');
+      const gradient = svg.querySelector('linearGradient');
+      circleElement.setAttribute('stroke', `url(#${gradient.id})`);
       circleElement.setAttribute('fill', 'none');
-      circleElement.setAttribute('stroke-width', '1');
+      circleElement.setAttribute('stroke-width', '2');
       svg.appendChild(circleElement);
     });
 
