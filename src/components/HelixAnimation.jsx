@@ -24,7 +24,7 @@ const HelixAnimation = () => {
     gradient.setAttribute('x2', '100%');
     gradient.setAttribute('y2', '100%');
 
-    const colors = ['#0000FF', '#00FFFF', '#FF1493', '#FF8C00'];
+    const colors = ['#0000FF', '#FF1493', '#FFA500', '#FF4500'];
     colors.forEach((color, index) => {
       const stop = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
       stop.setAttribute('offset', `${(index / (colors.length - 1)) * 100}%`);
