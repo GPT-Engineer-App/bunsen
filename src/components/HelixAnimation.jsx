@@ -42,7 +42,7 @@ const HelixAnimation = () => {
         const distance = (i / numCircles) * maxRadius * Math.min(t, 1);
         const x = centerX + Math.cos(angle) * distance;
         const y = centerY + Math.sin(angle) * distance;
-        const radius = 4 + (distance / maxRadius) * 16; // Larger circles
+        const radius = 8 + (distance / maxRadius) * 32; // Much larger circles
 
         circles.push({ x, y, radius });
       }
@@ -71,7 +71,7 @@ const HelixAnimation = () => {
       const gradient = svg.querySelector('linearGradient');
       circleElement.setAttribute('stroke', `url(#${gradient.id})`);
       circleElement.setAttribute('fill', 'none');
-      circleElement.setAttribute('stroke-width', '2');
+      circleElement.setAttribute('stroke-width', '1');
       svg.appendChild(circleElement);
     });
 
