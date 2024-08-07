@@ -9,8 +9,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      <header className="p-4 flex justify-between items-center">
+    <div className="min-h-screen bg-black text-white overflow-hidden relative">
+      <header className="p-4 flex justify-between items-center relative z-10">
         <h1 className="text-2xl font-bold">BUNSEN</h1>
         <nav>
           <ul className="flex space-x-6">
@@ -25,12 +25,12 @@ const Index = () => {
           </ul>
         </nav>
       </header>
-      <div className="container mx-auto px-4 py-8">
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <HelixAnimation />
       </div>
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-32 relative z-10">
         <motion.h2 
-          className="text-6xl font-bold mb-4"
+          className="text-8xl font-bold mb-4 leading-tight"
           initial="hidden"
           animate="visible"
           variants={textVariants}
@@ -38,7 +38,7 @@ const Index = () => {
           Science,<br />Meet Design.
         </motion.h2>
         <motion.p 
-          className="text-xl mb-8"
+          className="text-2xl mb-8 max-w-2xl"
           initial="hidden"
           animate="visible"
           variants={textVariants}
