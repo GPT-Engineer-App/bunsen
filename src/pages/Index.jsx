@@ -176,7 +176,7 @@ const Index = () => {
             <p>© Copyright 2023 Bunsen. All Rights Reserved.</p>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 };
